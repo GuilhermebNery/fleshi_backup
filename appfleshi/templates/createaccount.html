@@ -1,0 +1,65 @@
+{% extends "homepage.html" %}
+
+{% block title %}
+    Fléshi - Criar Conta
+{% endblock %}
+
+
+{% block form %}
+    <div class="form_login shadow-lg m-5 p-5 rounded border border-indigo-400 mt-1">
+        <form method="POST">
+            {{form.csrf_token }}
+            <div class=" mb-3">
+                {{ form.email.label(class="form-label mb-0", style="color: #fff; font-weight: bold;") }}
+                {{ form.email(class="form-control box_input border-indigo-400") }}
+
+                {% if form.email.errors %}
+                {% for erro in form.email.errors %}
+                    <p class="alert alert-danger mt-3" role="alert">{{erro}}</p>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div>
+                {{ form.username.label(class="form-label mb-0", style="color: #fff; font-weight: bold;") }}
+                {{ form.username(class="form-control box_input border-indigo-400 mb-2") }}
+
+                {% if form.username.errors %}
+                    {% for erro in form.username.errors %}
+                        <p class="alert alert-danger mt-3" role="alert">{{erro}}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+
+
+            <div class="mb-3">
+                {{ form.password.label(class="form-label mb-0", style="color: #fff; font-weight: bold;") }}
+                {{ form.password(class="form-control box_input border-indigo-400 mb-2") }}
+                {% if form.password.errors %}
+                    {% for erro in form.password.errors %}
+                        <p class="alert alert-danger mt-3" role="alert">{{erro}}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div>
+                {{ form.confirm_password.label(class="form-label mb-0", style="color: #fff; font-weight: bold;") }}
+                {{ form.confirm_password(class="form-control box_input border-indigo-400 mb-2") }}
+
+                {% if form.confirm_password.errors %}
+                    {% for erro in form.confirm_password.errors %}
+                        <p class="alert alert-danger mt-3" role="alert">{{erro}}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div>
+                {{ form.submit(class="btn background-btn-purple d-block mx-auto mb-3 mt-2", style="color: white;") }}
+            </div>
+        </form>
+
+        <a style=" color: #8540f5; "href="{{url_for('homepage')}}">Já tem uma conta? Entrar na conta</a>
+
+    </div>
+
+{% endblock %}

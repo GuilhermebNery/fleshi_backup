@@ -1,0 +1,84 @@
+{% extends "homepage.html" %}
+
+{%block title%}
+    Perfil - {{username}}
+{% endblock %}
+
+{% block body %}
+    <body>
+
+        {% include "navbar.html" %}
+
+        <h1>Perfil do usuário: {{ user.username }}</h1>
+
+
+<audio id="audioNotificacao" src="{{ url_for('static', filename='sons/alerta.mp3') }}" preload="auto"></audio>
+
+
+
+<button id="btnAtivarSom" style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9999; padding: 10px; background-color: #ff4b4b; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    🔇 Ativar Sons de Notificação
+</button>
+        {% if form %}
+            <form method="post" enctype="multipart/form-data">
+                {{ form.csrf_token }}
+
+                {{ form.photo() }}
+                {{ form.submit() }}
+
+            </form>
+        {% endif %}
+
+        {% for photo in user.photos %}
+            <img src="{{url_for('static',filename='posts_photos/'~ photo.file_name)}}" alt="Imagem defult">
+        {% endfor %}
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script type="text/javascript">
+    var socket = io();
+    var audio = document.getElementById("audioNotificacao");
+    var btnAtivar = document.getElementById("btnAtivarSom");
+
+    // Função que tenta tocar o som
+    function tentarTocarSom() {
+        // Tenta dar o play
+        var promessa = audio.play();
+
+        if (promessa !== undefined) {
+            promessa.then(_ => {
+                // SUCESSO: O som tocou, podemos esconder o botão se ele estiver visível
+                console.log("🎵 Som tocou!");
+                btnAtivar.style.display = "none";
+            }).catch(error => {
+                // FALHA: O navegador bloqueou
+                console.log("Autoplay bloqueado. Mostrando botão para o usuário.");
+                // Mostra o botão para o usuário clicar
+                btnAtivar.style.display = "block";
+            });
+        }
+    }
+
+    // Quando o usuário clicar no botão vermelho, desbloqueamos o áudio
+    btnAtivar.addEventListener('click', function() {
+        audio.play(); // Toca o som (agora funciona porque foi um clique)
+        audio.pause(); // Pausa imediatamente
+        audio.currentTime = 0; // Rebobina
+        btnAtivar.style.display = "none"; // Esconde o botão
+        alert("Sons ativados com sucesso!");
+    });
+
+    socket.on('connect', function() {
+        console.log("✅ Conectado!");
+    });
+
+    socket.on('novo_post', function(data) {
+        console.log("📩 Notificação:", data.mensagem);
+        // Tenta tocar o som quando chega a mensagem
+        tentarTocarSom();
+    });
+</script>
+
+
+    </body>
+
+{% endblock %}

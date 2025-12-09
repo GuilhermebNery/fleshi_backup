@@ -1,0 +1,50 @@
+.border-indigo-400 {
+    border-color: #a370f7 !important;
+}
+.background-btn-purple{
+    background: #59359a !important;
+}
+
+
+* {
+      padding:0px;
+      margin:0px;
+      box-sizing: border-box;
+      overflow-x: hidden;
+      overflow-y: hidden;
+      max-width: 100Vw;
+}
+
+.loginBlock{
+    width: 50%;
+    height: 100Vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+h1{
+    text-align: center;
+}
+.form_login {
+    justify-content: center;
+    box-shadow: 0px 5px 15px 4px rgba(255, 255, 255, 0.5) !important;
+
+}
+.box_input{
+    border: 1px black solid;
+
+}
+.grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+
+}
+
+img{
+    width: 284px;
+    height:auto;
+
+}
