@@ -1,4 +1,4 @@
-<nav class="" style="background-color: #a98eda; display:flex; justify-content: center; gap: 30px; padding: 20px;">
+<nav class="shadow p-3 mb-5 rounded" style="background-color: #a98eda; display:flex; justify-content: space-around; gap: 30px; padding: 20px;">
         <a style="text-decoration: none; color: white; font-size: 22px;" href="{{ url_for('feed') }}">Feed</a>
         <a style="text-decoration: none; color: white; font-size: 22px;" href="{{ url_for('profile', user_id=current_user.id) }}">Perfil</a>
         <a style="text-decoration: none; color: white; font-size: 22px;" href="{{ url_for('logout') }}">Sair</a>

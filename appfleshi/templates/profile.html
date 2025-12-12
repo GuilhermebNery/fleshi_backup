@@ -28,11 +28,16 @@
 
             </form>
         {% endif %}
+        <div class="container grid">
+            {% for photo in user.photos %}
+                <div class="div-a" style="display:flex; justify-content: center; ">
+                        <a class="shadow-lg " style=" padding: 30px 30px 90px 30px; background: #EFECE2; margin-bottom: 30px; border-radius: 2rem" href="{{ url_for('profile', user_id=photo.user_id) }}">
+                            <img class="image-feed" src="{{url_for('static',filename='posts_photos/'~ photo.file_name)}}" alt="Imagem defult">
+                        </a>
+                </div>
 
-        {% for photo in user.photos %}
-            <img src="{{url_for('static',filename='posts_photos/'~ photo.file_name)}}" alt="Imagem defult">
-        {% endfor %}
-
+            {% endfor %}
+        </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
     <script type="text/javascript">
     var socket = io();

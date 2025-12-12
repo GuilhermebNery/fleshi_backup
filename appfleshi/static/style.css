@@ -11,7 +11,7 @@
       margin:0px;
       box-sizing: border-box;
       overflow-x: hidden;
-      overflow-y: hidden;
+
       max-width: 100Vw;
 }
 
@@ -25,6 +25,7 @@
 
 }
 h1{
+    overflow-y: hidden;
     text-align: center;
 }
 .form_login {
@@ -37,14 +38,33 @@ h1{
 
 }
 .grid{
-    display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    display: grid;
+    grid-template-columns: repeat(3, 400px);
     gap: 25px;
-
+    justify-content: center;
+    padding: 25px;
 }
 
-img{
-    width: 284px;
-    height:auto;
+
+.image-feed {
+    width: 100%;
+    height: auto;
+    max-height: 40rem;
+    object-fit: contain;
+    display: block;
+}
+
+
+img {
+    width: 100%;
+    height: auto;
+}
+body{
+
+background: #fff9ff;
+}
+
+.div-a a{
+    width:100%;
 
 }
